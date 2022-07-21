@@ -24,6 +24,9 @@ jobs:
       - id: install-just
         name: Install Just
         run: cargo binstall just --no-confirm
+      - id: checkout
+        name: Checkout repo
+        uses: actions/checkout@v2
       - id: tests
         name: Run tests
         run: cargo nextest run
