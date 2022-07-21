@@ -1,3 +1,4 @@
+/// The different types of tokens in the Monkey language
 #[derive(PartialEq, Eq, Debug)]
 pub enum TokenType {
     ILLEGAL,
@@ -17,10 +18,27 @@ pub enum TokenType {
     LBRACE,
     RBRACE,
 
+    // Incomplete
     FUNCTION,
     LET,
 }
 
+impl From<char> for TokenType {
+    fn from(to_parse: char) -> Self {
+        match to_parse {
+            '=' => TokenType::ASSIGN,
+            '+' => TokenType::PLUS,
+            '(' => TokenType::LPAREN,
+            ')' => TokenType::RPAREN,
+            // TODO: to complete
+            _ => TokenType::ILLEGAL,
+        }
+    }
+}
+
+/// A specific token
+///
+/// Not sure it will stays in the long run
 pub struct Token {
     pub token_type: TokenType,
     pub literal: char,

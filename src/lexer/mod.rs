@@ -1,5 +1,6 @@
 use crate::token::{Token, TokenType};
 
+/// Lexer of the Monkey language
 struct Lexer {
     input: Vec<char>,
     current_pos: usize,
@@ -34,16 +35,11 @@ impl Lexer {
         self.next_read_pos += 1;
     }
 
+    // TODO: to convert to an actual Iterator
     pub fn next_token(&mut self) -> Option<Token> {
         let current_char = self.current_char?;
 
-        let token_type = match current_char {
-            '=' => TokenType::ASSIGN,
-            '+' => TokenType::PLUS,
-            '(' => TokenType::LPAREN,
-            ')' => TokenType::RPAREN,
-            _ => TokenType::ILLEGAL,
-        };
+        let token_type = TokenType::from(current_char);
         let token = Token {
             token_type,
             literal: current_char,
