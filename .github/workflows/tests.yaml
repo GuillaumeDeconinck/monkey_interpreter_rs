@@ -20,10 +20,10 @@ jobs:
           mv cargo-binstall $HOME/.cargo/bin
       - id: install-cargo-nextest
         name: Install cargo-nextext
-        run: cargo binstall cargo-nextest
+        run: cargo binstall cargo-nextest --no-confirm
       - id: install-just
         name: Install Just
-        run: cargo binstall just
+        run: cargo binstall just --no-confirm
       - id: tests
         name: Run tests
         run: cargo nextest run
