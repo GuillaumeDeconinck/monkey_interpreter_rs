@@ -1,0 +1,32 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - "**"
+    tags:
+      - "**"
+
+jobs:
+  test:
+    name: Launch tests
+    runs-on: ubuntu-latest
+    steps:
+      - id: install-binstall
+        name: Install cargo-binstall
+        run: |
+          wget -O - https://github.com/ryankurte/cargo-binstall/releases/latest/download/cargo-binstall-x86_64-unknown-linux-musl.tgz | tar zxvf -
+          mkdir -p $HOME/.cargo/bin
+          mv cargo-binstall $HOME/.cargo/bin
+      - id: install-cargo-nextest
+        name: Install cargo-nextext
+        run: cargo binstall cargo-nextest --no-confirm
+      - id: install-just
+        name: Install Just
+        run: cargo binstall just --no-confirm
+      - id: checkout
+        name: Checkout repo
+        uses: actions/checkout@v2
+      - id: tests
+        name: Run tests
+        run: cargo nextest run
