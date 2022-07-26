@@ -292,5 +292,8 @@ mod tests {
             assert_eq!(token.token_type, case.0);
             assert_eq!(token.literal, case.1);
         }
+
+        // Lexer should return None once all the characters have been parsed
+        assert_eq!(lexer.next_token().is_none(), true);
     }
 }
