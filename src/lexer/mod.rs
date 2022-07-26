@@ -285,7 +285,9 @@ mod tests {
         let mut lexer = Lexer::new(input);
 
         for case in test_cases.into_iter() {
-            let token = lexer.next_token().unwrap();
+            let token = lexer
+                .next_token()
+                .expect(format!("Got `None` while expecting the token {:?}", case.0).as_str());
 
             println!("{:?}", &token);
 
