@@ -1,10 +1,10 @@
-use std::io::{Stdin, Stdout, Write};
+use std::io::{BufRead, Write};
 
 use crate::{lexer, token::TokenType};
 
 const PROMPT: &str = ">> ";
 
-pub fn start_repl(input: Stdin, mut output: Stdout) {
+pub fn start_repl(input: &mut dyn BufRead, output: &mut dyn Write) {
     loop {
         // TODO: handle errors more gracefully
         output.write_all(PROMPT.as_bytes()).unwrap();

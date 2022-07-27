@@ -8,7 +8,8 @@ fn main() {
     println!("Starting REPL...");
 
     let stdin = stdin();
-    let stdout = stdout();
+    let mut stdout = stdout();
 
-    repl::start_repl(stdin, stdout);
+    // Might not be the best to have a lock for so long
+    repl::start_repl(&mut stdin.lock(), &mut stdout);
 }
