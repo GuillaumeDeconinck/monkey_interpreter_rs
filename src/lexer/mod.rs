@@ -1,7 +1,7 @@
 use crate::token::{Token, TokenType};
 
 /// Lexer of the Monkey language
-struct Lexer {
+pub struct Lexer {
     input: Vec<char>,
     current_pos: usize,
     next_read_pos: usize,
