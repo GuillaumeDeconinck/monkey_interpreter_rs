@@ -17,7 +17,9 @@ pub fn start_repl(input: &mut dyn BufRead, output: &mut dyn Write) {
         let mut lexer = lexer::Lexer::new(str_buffer);
 
         while let Some(token) = lexer.next_token() {
-            if token.token_type == TokenType::Eof {
+            if token.token_type == TokenType::Eof
+                || token.token_type == TokenType::Ident("exit".into())
+            {
                 return;
             }
 
