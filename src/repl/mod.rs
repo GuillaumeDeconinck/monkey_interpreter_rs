@@ -30,3 +30,24 @@ pub fn start_repl(input: &mut dyn BufRead, output: &mut dyn Write) {
         }
     }
 }
+
+#[cfg(test)]
+mod test {
+    use std::io::{BufReader, BufWriter};
+
+    use super::start_repl;
+
+    #[test]
+    fn test() {
+        let input = String::from("let five = 5;exit");
+
+        let mut buffer_read = BufReader::new(input.as_bytes());
+        let mut buffer_write = BufWriter::new(vec![0; 50]);
+
+        start_repl(&mut buffer_read, &mut buffer_write);
+
+        let printed = String::from_utf8(buffer_write.buffer().to_owned()).unwrap();
+
+        assert_eq!(printed, "Let\nIdent(\"five\")\nAssign\nInt(5)\nSemicolon\n");
+    }
+}
